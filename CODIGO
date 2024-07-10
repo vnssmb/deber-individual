@@ -50,17 +50,21 @@ public class Main extends Application {
         yearComboBox.getItems().addAll(2014, 2015, 2016, 2017, 2018);
 
         TableView<Constructor> tableView = new TableView<>();
-        TableColumn<Constructor, String> nameColumn = new TableColumn<>("Constructors");
+        TableColumn<Constructor, String> nameColumn = new TableColumn<>("DRIVER NAME");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameColumn.setMinWidth(150);
 
-        TableColumn<Constructor, Integer> winsColumn = new TableColumn<>("Wins");
+        TableColumn<Constructor, Integer> winsColumn = new TableColumn<>("WINS");
         winsColumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
+        winsColumn.setMinWidth(100);
 
-        TableColumn<Constructor, Integer> totalPointsColumn = new TableColumn<>("Total Points");
+        TableColumn<Constructor, Integer> totalPointsColumn = new TableColumn<>("TOTAL POINTS");
         totalPointsColumn.setCellValueFactory(new PropertyValueFactory<>("totalPoints"));
+        totalPointsColumn.setMinWidth(120);
 
-        TableColumn<Constructor, Integer> rankColumn = new TableColumn<>("Rank");
+        TableColumn<Constructor, Integer> rankColumn = new TableColumn<>("RANK");
         rankColumn.setCellValueFactory(new PropertyValueFactory<>("rank"));
+        rankColumn.setMinWidth(80);
 
         tableView.getColumns().addAll(nameColumn, winsColumn, totalPointsColumn, rankColumn);
 
@@ -157,7 +161,7 @@ public class Main extends Application {
         });
 
         VBox vbox = new VBox(yearComboBox, tableView);
-        Scene scene = new Scene(vbox, 600, 400);
+        Scene scene = new Scene(vbox, 700, 400);
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("Tabla de Constructores por Año");
