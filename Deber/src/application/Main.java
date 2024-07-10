@@ -1,0 +1,170 @@
+package application;
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    public static class Constructor {
+        private String name;
+        private int wins;
+        private int totalPoints;
+        private int rank;
+
+        public Constructor(String name, int wins, int totalPoints, int rank) {
+            this.name = name;
+            this.wins = wins;
+            this.totalPoints = totalPoints;
+            this.rank = rank;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getWins() {
+            return wins;
+        }
+
+        public int getTotalPoints() {
+            return totalPoints;
+        }
+
+        public int getRank() {
+            return rank;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void start(Stage primaryStage) {
+        ComboBox<Integer> yearComboBox = new ComboBox<>();
+        yearComboBox.getItems().addAll(2014, 2015, 2016, 2017, 2018);
+
+        TableView<Constructor> tableView = new TableView<>();
+        TableColumn<Constructor, String> nameColumn = new TableColumn<>("Constructors");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn<Constructor, Integer> winsColumn = new TableColumn<>("Wins");
+        winsColumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
+
+        TableColumn<Constructor, Integer> totalPointsColumn = new TableColumn<>("Total Points");
+        totalPointsColumn.setCellValueFactory(new PropertyValueFactory<>("totalPoints"));
+
+        TableColumn<Constructor, Integer> rankColumn = new TableColumn<>("Rank");
+        rankColumn.setCellValueFactory(new PropertyValueFactory<>("rank"));
+
+        tableView.getColumns().addAll(nameColumn, winsColumn, totalPointsColumn, rankColumn);
+
+        ObservableList<Constructor> constructors2014 = FXCollections.observableArrayList(
+                new Constructor("Mercedes", 19, 6830, 1),
+                new Constructor("Red Bull", 19, 3793, 2),
+                new Constructor("Williams", 19, 2439, 3),
+                new Constructor("Ferrari", 19, 2314, 4),
+                new Constructor("McLaren", 19, 1757, 5),
+                new Constructor("Force India", 19, 1680, 6),
+                new Constructor("Toro Rosso", 19, 328, 7),
+                new Constructor("Lotus F1", 19, 122, 8),
+                new Constructor("Marussia", 19, 28, 9),
+                new Constructor("Sauber", 19, 0, 10),
+                new Constructor("Caterham", 19, 0, 10)
+        );
+
+        ObservableList<Constructor> constructors2015 = FXCollections.observableArrayList(
+                new Constructor("Mercedes", 20, 7000, 1),
+                new Constructor("Ferrari", 20, 6000, 2),
+                new Constructor("Williams", 20, 4000, 3),
+                new Constructor("Red Bull", 20, 3000, 4),
+                new Constructor("Force India", 20, 2500, 5),
+                new Constructor("Lotus F1", 20, 2000, 6),
+                new Constructor("Sauber", 20, 1500, 7),
+                new Constructor("Toro Rosso", 20, 1000, 8),
+                new Constructor("McLaren", 20, 500, 9),
+                new Constructor("Marussia", 20, 0, 10)
+        );
+
+        ObservableList<Constructor> constructors2016 = FXCollections.observableArrayList(
+                new Constructor("Mercedes", 21, 7200, 1),
+                new Constructor("Red Bull", 21, 4800, 2),
+                new Constructor("Ferrari", 21, 4600, 3),
+                new Constructor("Force India", 21, 4200, 4),
+                new Constructor("Williams", 21, 4000, 5),
+                new Constructor("McLaren", 21, 3200, 6),
+                new Constructor("Toro Rosso", 21, 2000, 7),
+                new Constructor("Sauber", 21, 1000, 8),
+                new Constructor("Lotus F1", 21, 500, 9),
+                new Constructor("Manor", 21, 0, 10)
+        );
+
+        ObservableList<Constructor> constructors2017 = FXCollections.observableArrayList(
+                new Constructor("Mercedes", 20, 7600, 1),
+                new Constructor("Ferrari", 20, 5200, 2),
+                new Constructor("Red Bull", 20, 4900, 3),
+                new Constructor("Force India", 20, 4100, 4),
+                new Constructor("Williams", 20, 3900, 5),
+                new Constructor("Toro Rosso", 20, 2900, 6),
+                new Constructor("Haas", 20, 2100, 7),
+                new Constructor("Renault", 20, 1500, 8),
+                new Constructor("McLaren", 20, 1200, 9),
+                new Constructor("Sauber", 20, 600, 10)
+        );
+
+        ObservableList<Constructor> constructors2018 = FXCollections.observableArrayList(
+                new Constructor("Mercedes", 21, 8000, 1),
+                new Constructor("Ferrari", 21, 6200, 2),
+                new Constructor("Red Bull", 21, 5500, 3),
+                new Constructor("Renault", 21, 3800, 4),
+                new Constructor("Haas", 21, 3500, 5),
+                new Constructor("McLaren", 21, 3100, 6),
+                new Constructor("Force India", 21, 2500, 7),
+                new Constructor("Sauber", 21, 2000, 8),
+                new Constructor("Toro Rosso", 21, 1500, 9),
+                new Constructor("Williams", 21, 1000, 10)
+        );
+
+        yearComboBox.setOnAction(e -> {
+            Integer selectedYear = yearComboBox.getValue();
+            if (selectedYear != null) {
+                switch (selectedYear) {
+                    case 2014:
+                        tableView.setItems(constructors2014);
+                        break;
+                    case 2015:
+                        tableView.setItems(constructors2015);
+                        break;
+                    case 2016:
+                        tableView.setItems(constructors2016);
+                        break;
+                    case 2017:
+                        tableView.setItems(constructors2017);
+                        break;
+                    case 2018:
+                        tableView.setItems(constructors2018);
+                        break;
+                    default:
+                        tableView.setItems(FXCollections.observableArrayList());
+                        break;
+                }
+            }
+        });
+
+        VBox vbox = new VBox(yearComboBox, tableView);
+        Scene scene = new Scene(vbox, 600, 400);
+
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Tabla de Constructores por Año");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
